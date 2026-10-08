@@ -27,26 +27,43 @@ public class Artista implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fechaNacimiento;
     
-
     public Artista() { }
 
-    public Artista(String nombre, String generoMusical, String nacionalidad, int edad) {
+    public Artista(String nombre, String generoMusical, String nacionalidad, int edad, Date fechaNacimiento) {
         this.nombre = nombre;
         this.generoMusical = generoMusical;
         this.nacionalidad = nacionalidad;
         this.edad = edad;
+        this.fechaNacimiento = fechaNacimiento;
     }
 
     // getters/setters
     public int getId() { return id; }
+    
     public String getNombre() { return nombre; }
+    
     public void setNombre(String nombre) { this.nombre = nombre; }
+    
     public String getGeneroMusical() { return generoMusical; }
+    
     public void setGeneroMusical(String generoMusical) { this.generoMusical = generoMusical; }
+    
     public String getNacionalidad() { return nacionalidad; }
+    
     public void setNacionalidad(String nacionalidad) { this.nacionalidad = nacionalidad; }
     public int getEdad() { return edad; }
+    
     public void setEdad(int edad) { this.edad = edad; }
+    
+    //Getters y Setters para fechaNacimiento
+    public Date getFechaNacimiento() { return fechaNacimiento; }
+    
+    public void setFechaNacimiento(Date fechaNacimiento) { this.fechaNacimiento = fechaNacimiento; }
+
+	@Override
+	public String toString() {
+		return "ARTISTA: \n" + "ID: " + getId() + "\nNombre: " + getNombre() + "\nGenero musical: " + getGeneroMusical()
+				+ "\nNacionalidad: " + getNacionalidad() + "\nEdad: " + getEdad();
+
+	}
 }
-
-

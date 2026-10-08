@@ -1,4 +1,6 @@
 package com.app.logica;
+//esto es el backend*****************
+//flujo de datos de una API
 
 import com.app.persistencia.ControladoraPersistencia;
 
@@ -6,17 +8,21 @@ public class ControladoraLogica {
 
 	// La controladora de persistencia se encarga de hablar con la BD.
 	// Desde aquí la usamos como "puente" para guardar datos.
+	
+	//creo objecto de la ControladoraPersistencia
 	ControladoraPersistencia controlPersis = new ControladoraPersistencia();
 
 	// ----- ARTISTA -----
 	// Método de la capa lógica para crear un artista.
 	// Antes de guardarlo en la BD, se hacen validaciones.
+	
 	public void crearArtista(Artista art) throws Exception {
-		// Validación: el artista debe tener un nombre
+		// Validación: el artista debe tener un nombre SE VALIDA
 		if (art.getNombre() == null || art.getNombre().isEmpty()) {
+		//throw new Exception quiere decir que genere un codigo pero que no avance 
 			throw new Exception("El artista debe tener un nombre.");
 		}
-		// Validación: el artista debe tener un género musical
+		// Validación: el artista debe tener un género musical 
 		if (art.getGeneroMusical() == null || art.getGeneroMusical().isEmpty()) {
 			throw new Exception("El artista debe tener un género musical.");
 		}
@@ -25,10 +31,15 @@ public class ControladoraLogica {
 			throw new Exception("La edad del artista debe ser mayor a 0.");
 		}
 
-		// AGREGAR AL MENOS UNA VALIDACIÓN MAS
-		
+		// AGREGAR AL MENOS UNA VALIDACIÓN MAS**************
+		// Fecha de nacimiento no nula y en el pasado/presente
+        if (art.getFechaNacimiento() == null) {
+            throw new Exception("El artista debe tener una fecha de nacimiento.");
+        }
 		// Si pasa todas las validaciones, recién ahí se manda a la persistencia
-		controlPersis.crearArtista(art);
+		//LE PASSA EL DATO A LA CONTROLADORAPERSISTENCIA 
+			// CONTROLADORAPERSISTENCIA  ESTA elige el metodo necesario
+			controlPersis.crearArtista(art);
 	}
 
 	// ----- CANCIÓN -----
@@ -51,9 +62,8 @@ public class ControladoraLogica {
 		// AGREGAR AL MENOS UNA VALIDACIÓN MAS
 
 		// Si pasa todas las validaciones, se guarda en la base de datos
-		//controlPersis.crearCancion(can);
+		controlPersis.crearCancion(can);
 	}
 }
-
 
 

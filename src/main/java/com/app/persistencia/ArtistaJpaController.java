@@ -5,6 +5,7 @@ import com.app.logica.Artista;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import java.util.List;
 
 public class ArtistaJpaController {
 	
@@ -14,10 +15,35 @@ public class ArtistaJpaController {
 
 	// En el constructor decimos con qué unidad de persistencia vamos a trabajar.
 	// Esa unidad está definida en persistence.xml con el nombre "ejemplojpa".
+	// tengo que espicicar con el mismo nombre que esta en mi unidad 
+	
+	
 	public ArtistaJpaController() {
-		emf = Persistence.createEntityManagerFactory("ejemplojpa");
+		emf = Persistence.createEntityManagerFactory("mi-unidad-jpa");
 	}
 
+	// BUSCAR UNO: busca un artista por su id.
+	// No hace falta transacción porque no modifica nada en la base.
+	public Artista buscarUno(int id) {
+	EntityManager em = getEntityManager();
+	try {
+	// find busca por clave primaria. Si no existe, devuelve null.
+	return em.find(Artista.class, id);
+	} finally {
+	em.close();
+	}
+	}
+	// BUSCAR TODOS: devuelve una lista con todos los artistas.
+	public List<Artista> buscarTodos() {
+		EntityManager em = getEntityManager();
+		try {
+			// Consulta JPQL: "traeme todos los objetos Artista"
+			return em.createQuery("SELECT a FROM Artista a", Artista.class).getResultList();
+		} finally {
+			em.close();
+		}
+	}
+	
 	// Método que crea y devuelve un nuevo "EntityManager".
 	// Pensalo como: "dame un empleado que se conecte a la base para trabajar".
 	public EntityManager getEntityManager() {
@@ -47,5 +73,4 @@ public class ArtistaJpaController {
 		}
 	}
 }
-
 

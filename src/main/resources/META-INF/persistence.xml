@@ -15,7 +15,7 @@ value="jdbc:mysql://localhost:3306/nombre_de_tu_base_de_datos"/>
 <property name="jakarta.persistence.jdbc.user" value="tu_usuario"/> 
 <property name="jakarta.persistence.jdbc.password" value="tu_contrasena"/> 
 
-<property name="hibernate.hbm2ddl.auto" value="create"/> 
+<property name="hibernate.hbm2ddl.auto" value="update"/>
 <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/> 
 </properties> 
 
