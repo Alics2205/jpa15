@@ -56,7 +56,8 @@ public class Main {
 		} else {
 			System.out.println("No existe un artista con ese id");
 		}
-		
+
+				// ----- LECTURA DE CANCIONES-----
 		System.out.println("=== TODAS LAS CANCIONES ===");
 		List<Cancion> canciones = conLog.listarCanciones();
 		for (Cancion c : canciones) {
