@@ -8,42 +8,19 @@ import jakarta.persistence.Persistence;
 import java.util.List;
 
 public class ArtistaJpaController {
-	
+
 	// "Fábrica" de conexiones (EntityManagerFactory).
 	// Sirve para crear EntityManager, que son los que realmente hablan con la BD.
 	private EntityManagerFactory emf = null;
 
 	// En el constructor decimos con qué unidad de persistencia vamos a trabajar.
 	// Esa unidad está definida en persistence.xml con el nombre "ejemplojpa".
-	// tengo que espicicar con el mismo nombre que esta en mi unidad 
-	
-	
+	// tengo que espicicar con el mismo nombre que esta en mi unidad
+
 	public ArtistaJpaController() {
 		emf = Persistence.createEntityManagerFactory("mi-unidad-jpa");
 	}
 
-	// BUSCAR UNO: busca un artista por su id.
-	// No hace falta transacción porque no modifica nada en la base.
-	public Artista buscarUno(int id) {
-	EntityManager em = getEntityManager();
-	try {
-	// find busca por clave primaria. Si no existe, devuelve null.
-	return em.find(Artista.class, id);
-	} finally {
-	em.close();
-	}
-	}
-	// BUSCAR TODOS: devuelve una lista con todos los artistas.
-	public List<Artista> buscarTodos() {
-		EntityManager em = getEntityManager();
-		try {
-			// Consulta JPQL: "traeme todos los objetos Artista"
-			return em.createQuery("SELECT a FROM Artista a", Artista.class).getResultList();
-		} finally {
-			em.close();
-		}
-	}
-	
 	// Método que crea y devuelve un nuevo "EntityManager".
 	// Pensalo como: "dame un empleado que se conecte a la base para trabajar".
 	public EntityManager getEntityManager() {
@@ -56,13 +33,13 @@ public class ArtistaJpaController {
 		try {
 			// Abrimos la conexión (pedimos un empleado).
 			em = getEntityManager();
-			
+
 			// Iniciamos una transacción: empieza la "promesa".
 			em.getTransaction().begin();
-			
+
 			// Guardamos el objeto en la base (pero todavía no está confirmado).
 			em.persist(art);
-			
+
 			// Confirmamos la transacción: ahora sí el objeto queda guardado.
 			em.getTransaction().commit();
 		} finally {
@@ -72,5 +49,32 @@ public class ArtistaJpaController {
 			}
 		}
 	}
-}
 
+	/*-----------los agrego dentro de ArtistaJpaController--------------------
+	--------------------pero despues de crear(Artista art)-----------------*/
+
+	// BUSCAR UNO: busca un artista por su id.
+	// No hace falta transacción porque no modifica nada en la base.
+	public Artista buscarUno(int id) {
+		EntityManager em = getEntityManager();
+		try {
+			// find busca por clave primaria. Si no existe, devuelve null.
+			return em.find(Artista.class, id);
+		} finally {
+			em.close();
+		}
+	}
+
+	// BUSCAR TODOS: devuelve una lista con todos los artistas.
+	public List<Artista> buscarTodos() {
+		EntityManager em = getEntityManager();
+		try {
+			// Consulta JPQL: "traeme todos los objetos Artista"
+			return em.createQuery("SELECT a FROM Artista a", Artista.class).getResultList();
+		} finally {
+			em.close();
+		}
+
+	}
+
+}

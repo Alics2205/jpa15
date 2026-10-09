@@ -3,7 +3,7 @@ package com.app.logica;
 //flujo de datos de una API
 
 import com.app.persistencia.ControladoraPersistencia;
-
+import java.util.List;
 public class ControladoraLogica {
 
 	// La controladora de persistencia se encarga de hablar con la BD.
@@ -42,6 +42,16 @@ public class ControladoraLogica {
 			controlPersis.crearArtista(art);
 	}
 
+	// ontiene todos los artistas desde la persistencia
+		public List<Artista> listarArtistas() {
+			return controlPersis.buscarTodosLosArtistas();
+		}
+		
+		// busca un artista por ID
+		public Artista buscarUnArtista(int id) {
+			return controlPersis.buscarArtista(id);
+		}
+	
 	// ----- CANCIÓN -----
 	// Método de la capa lógica para crear una canción.
 	// Se valida que tenga datos coherentes antes de persistirla.
@@ -64,6 +74,18 @@ public class ControladoraLogica {
 		// Si pasa todas las validaciones, se guarda en la base de datos
 		controlPersis.crearCancion(can);
 	}
+	
+	//obtiene todas las canciones desde la persistencia
+		public List<Cancion> listarCanciones() {
+			return controlPersis.buscarTodasLasCanciones();
+		}
+
+		//busca una canción por ID
+		public Cancion buscarUnaCancion(int id) {
+			return controlPersis.buscarCancion(id);
+		}
+	
+	
 }
 
 

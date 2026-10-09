@@ -2,6 +2,8 @@ package com.app.persistencia;
 //importa entidades Artista y Cancion  que esran fuera del paquete
 import com.app.logica.Artista;
 import com.app.logica.Cancion;
+import java.util.List;
+
 
 public class ControladoraPersistencia {
 	// Artista: Creamos una instancia del controlador que sabe cómo hablar con la
@@ -21,8 +23,30 @@ public class ControladoraPersistencia {
 	}
 	
 // AL IGUAL QUE CON ARTISTA, GENERAR EL MÉTODO “crearCancion()”
-	public void crearCancion (Cancion cancion){
+	public void crearCancion(Cancion cancion) {
 		cancionJpa.crear(cancion);
 	}
+
+	// BUSCAR UN ARTISTA
+	public Artista buscarArtista(int id) {
+		return artistaJpa.buscarUno(id);
+	}
+
+	// BUSCAR TODOS LOS ARTISTAS
+	public List<Artista> buscarTodosLosArtistas() {
+		return artistaJpa.buscarTodos();
+	}
+	
+	// ----------------METODOS DE CANCION ------------------------
+	
+	// BUSCAR UN CANCION
+		public Cancion buscarCancion(int id) {
+		return cancionJpa.buscarUno(id);
+		}
+		// BUSCAR TODOS LOS CANCION
+		public List<Cancion> buscarTodasLasCanciones() {
+		return cancionJpa.buscarTodos();
+		}
+		
 }
 

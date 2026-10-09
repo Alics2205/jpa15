@@ -6,11 +6,11 @@ import java.util.GregorianCalendar;
 import com.app.logica.Artista;
 import com.app.logica.Cancion;
 import com.app.logica.ControladoraLogica;
-
+import java.util.List;
 
 public class Main {
 	public static void main(String[] args) {
-		
+
 		Calendar cal1 = new GregorianCalendar(1972, Calendar.AUGUST, 9);
 		Date fechaJuanes = cal1.getTime();
 
@@ -20,7 +20,7 @@ public class Main {
 		ControladoraLogica conLog = new ControladoraLogica();
 		try {
 			// CREAR AL MENOS DOS ARTISTAS, Y DOS CANCIONES
-			
+
 			Artista a1 = new Artista("Juanes", "Pop", "colombiano", 45, fechaJuanes);
 			conLog.crearArtista(a1);
 
@@ -29,12 +29,57 @@ public class Main {
 
 			Cancion c1 = new Cancion("y", 2.34f, 2000);
 			conLog.crearCancion(c1);
-			
+
 			Cancion c2 = new Cancion("4", 4.67f, 2009);
 			conLog.crearCancion(c2);
 		} catch (Exception e) {
 			System.out.println("No se pudo crear el elemento: " + e.getMessage());
 		}
 
+		// ----- LECTURA DE ARTISTAS -----
+		System.out.println("=== TODOS LOS ARTISTAS ===");
+		List<Artista> artistas = conLog.listarArtistas();
+		for (Artista a : artistas) {
+			System.out.println(a);
+		}
+		System.out.println("=== BUSCAR ARTISTA CON ID 1 ===");
+		Artista encontrado = conLog.buscarUnArtista(1);
+		if (encontrado != null) {
+			System.out.println(encontrado);
+		} else {
+			System.out.println("No existe un artista con ese id");
+		}
+		System.out.println("=== BUSCAR ARTISTA CON ID 999 ===");
+		Artista noExiste = conLog.buscarUnArtista(999);
+		if (noExiste != null) {
+			System.out.println(noExiste);
+		} else {
+			System.out.println("No existe un artista con ese id");
+		}
+		
+		System.out.println("=== TODAS LAS CANCIONES ===");
+		List<Cancion> canciones = conLog.listarCanciones();
+		for (Cancion c : canciones) {
+			System.out.println(c);
+		}
+
+		System.out.println("=== BUSCAR CANCIÓN CON ID 1 ===");
+		Cancion encontrada = conLog.buscarUnaCancion(1);
+		if (encontrada != null) {
+			System.out.println(encontrada); // CORREGIDO: imprimimos 'encontrada'
+		} else {
+			System.out.println("No existe una canción con ese id");
+		}
+
+		System.out.println("=== BUSCAR CANCIÓN CON ID 999 ===");
+		Cancion noExisteC = conLog.buscarUnaCancion(999);
+		if (noExisteC != null) {
+			System.out.println(noExisteC); // CORREGIDO: imprimimos 'noExisteC'
+		} else {
+			System.out.println("No existe una canción con ese id");
+		}
+
+
 	}
+
 }
